@@ -1,0 +1,17 @@
+name = "tests"
+description = "Flux tests"
+version = "0.1.0-dev"
+
+executables = ["tests"]
+
+[[depends-on]]
+flux = "*"
+
+[[pins]]
+flux = { path='..' }
+
+[[depends-on]]
+stopwatch = "~0.1.0"
+
+#[build-profiles]
+#flux = "development"
