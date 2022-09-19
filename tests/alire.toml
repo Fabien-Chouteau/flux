@@ -6,12 +6,9 @@ executables = ["tests"]
 
 [[depends-on]]
 flux = "*"
+flux_benchmark = "*"
+stopwatch = "~0.1.0"
 
 [[pins]]
 flux = { path='..' }
-
-[[depends-on]]
-stopwatch = "~0.1.0"
-
-#[build-profiles]
-#flux = "development"
+flux_benchmark = { path='../flux_benchmark' }

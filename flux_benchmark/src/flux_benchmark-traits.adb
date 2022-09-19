@@ -1,27 +1,27 @@
 with Flux.Traits.Bounded_Array_Duplex;
 with Flux.Traits.LEB128;
 
-with Ada.Text_IO;
-
 with Interfaces;
 
-with Stopwatch;
+with Flux_Benchmark_Config;
 
-package body Testsuite.Perf.Traits is
+package body Flux_Benchmark.Traits is
 
    Prod_Buffer : constant Flux.Traits.Bounded_Array_Duplex.Acc
-     := new Flux.Traits.Bounded_Array_Duplex.Instance'(Len => Buffer_Size,
-                                                            others => <>);
+     := new Flux.Traits.Bounded_Array_Duplex.Instance'
+       (Len => Flux_Benchmark_Config.Buffer_Size,
+        others => <>);
 
    Consumer_Buffer : constant Flux.Traits.Bounded_Array_Duplex.Acc
-     := new Flux.Traits.Bounded_Array_Duplex.Instance'(Len => Buffer_Size,
-                                                            others => <>);
+     := new Flux.Traits.Bounded_Array_Duplex.Instance'
+       (Len => Flux_Benchmark_Config.Buffer_Size,
+        others => <>);
 
    ------------------
    -- Run_Producer --
    ------------------
 
-   procedure Run_Producer is
+   procedure Run_Producer (T : in out Timer'Class) is
 
       procedure Encode_LEB128
       is new Flux.Traits.LEB128.Encode
@@ -29,11 +29,9 @@ package body Testsuite.Perf.Traits is
          Flux.Traits.Bounded_Array_Duplex.Sink_Traits);
 
       Success : Boolean;
-
-      Watch : Stopwatch.Instance;
    begin
-      Watch.Release;
-      for Count in 1 .. Number_Of_Iterations loop
+      T.Start;
+      for Count in 1 .. Flux_Benchmark_Config.Number_Of_Iterations loop
 
          Flux.Traits.Bounded_Array_Duplex.Reset (Prod_Buffer.all);
 
@@ -42,16 +40,14 @@ package body Testsuite.Perf.Traits is
             exit when not Success;
          end loop;
       end loop;
-      Watch.Hold;
-
-      Ada.Text_IO.Put_Line ("Producer Traits Elapsed: " & Watch.Image);
+      T.Stop;
    end Run_Producer;
 
    ------------------
    -- Run_Producer --
    ------------------
 
-   procedure Run_Consumer is
+   procedure Run_Consumer (T : in out Timer'Class) is
 
       procedure Decode_LEB128
       is new Flux.Traits.LEB128.Decode
@@ -60,15 +56,14 @@ package body Testsuite.Perf.Traits is
 
       Success : Boolean;
 
-      Watch : Stopwatch.Instance;
       Val : Interfaces.Unsigned_32;
    begin
 
-      for Count in 1 .. Number_Of_Iterations loop
+      for Count in 1 .. Flux_Benchmark_Config.Number_Of_Iterations loop
 
-         Watch.Hold;
+         T.Stop;
          Consumer_Buffer.all := Prod_Buffer.all;
-         Watch.Release;
+         T.Start;
 
          for X in Interfaces.Unsigned_32'Range loop
             Decode_LEB128 (Consumer_Buffer.all, Val, Success);
@@ -76,9 +71,7 @@ package body Testsuite.Perf.Traits is
          end loop;
       end loop;
 
-      Watch.Hold;
-
-      Ada.Text_IO.Put_Line ("Consumer Traits Elapsed: " & Watch.Image);
+      T.Stop;
    end Run_Consumer;
 
-end Testsuite.Perf.Traits;
+end Flux_Benchmark.Traits;

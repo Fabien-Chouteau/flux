@@ -1,15 +1,28 @@
+with Ada.Text_IO;
 
-with Testsuite.Perf.Traits;
-with Testsuite.Perf.Interfaces;
+with Flux_Benchmark.Traits;
+with Flux_Benchmark.Interfaces;
+
+with Stopwatch_Timer;
 
 procedure Tests is
-
+   Timer : Stopwatch_Timer.Instance;
 begin
 
-   Testsuite.Perf.Traits.Run_Producer;
-   Testsuite.Perf.Traits.Run_Consumer;
+   Timer.Reset;
+   Flux_Benchmark.Traits.Run_Producer (Timer);
+   Ada.Text_IO.Put_Line ("Traits prod:" & Timer.Elapsed'Img & " sec");
 
-   Testsuite.Perf.Interfaces.Run_Producer;
-   Testsuite.Perf.Interfaces.Run_Consumer;
+   Timer.Reset;
+   Flux_Benchmark.Traits.Run_Consumer (Timer);
+   Ada.Text_IO.Put_Line ("Traits consumer:" & Timer.Elapsed'Img & " sec");
+
+   Timer.Reset;
+   Flux_Benchmark.Interfaces.Run_Producer (Timer);
+   Ada.Text_IO.Put_Line ("Interfaces prod:" & Timer.Elapsed'Img & " sec");
+
+   Timer.Reset;
+   Flux_Benchmark.Interfaces.Run_Consumer (Timer);
+   Ada.Text_IO.Put_Line ("Interfaces consumer:" & Timer.Elapsed'Img & " sec");
 
 end Tests;

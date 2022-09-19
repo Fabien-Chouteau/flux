@@ -1,0 +1,14 @@
+name = "flux_benchmark"
+description = "Shiny new project"
+version = "0.1.0-dev"
+
+[[depends-on]]
+flux = "*"
+stopwatch = "~0.1.0"
+
+[[pins]]
+flux = { path='..' }
+
+[configuration.variables]
+Number_Of_Iterations = { type = "integer", first = 1, default = 100_000}
+Buffer_Size = { type = "integer", first = 1, default = 10240}
