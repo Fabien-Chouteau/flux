@@ -4,7 +4,13 @@ project Flux is
    for Library_Name use "Flux";
    for Library_Version use Project'Library_Name & ".so." & Flux_Config.Crate_Version;
 
-   for Source_Dirs use ("src/", "config/");
+   Src_Dirs := ();
+   case Flux_Config.Enable_File_IO is
+      when "True" => Src_Dirs := Src_Dirs & ("src/file_io");
+      when others => null;
+   end case;
+
+   for Source_Dirs use ("src/", "config/") & Src_Dirs;
    for Object_Dir use "obj/" & Flux_Config.Build_Profile;
    for Create_Missing_Dirs use "True";
    for Library_Dir use "lib";

@@ -6,3 +6,6 @@ licenses = "Apache-2.0"
 authors = ["Fabien Chouteau"]
 maintainers = ["Fabien Chouteau <chouteau@adacore.com>"]
 maintainers-logins = ["Fabien-Chouteau"]
+
+[configuration.variables]
+Enable_File_IO = { type = "Boolean", default = true}
