@@ -1,0 +1,18 @@
+name = "benchmark_rp2040"
+description = "Shiny new project"
+version = "0.1.0-dev"
+
+executables = ["benchmark_rp2040"]
+
+[[depends-on]]
+flux = "*"
+flux_benchmark= "*"
+pico_bsp = "^2.0.0"
+gnat_arm_elf = "*"
+
+[[pins]]
+flux = { path = ".."}
+flux_benchmark = { path = "../flux_benchmark"}
+
+[configuration.values]
+flux.Enable_File_IO = false

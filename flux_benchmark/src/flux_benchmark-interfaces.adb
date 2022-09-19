@@ -8,13 +8,11 @@ with Flux_Benchmark_Config;
 
 package body Flux_Benchmark.Interfaces is
 
-   Prod_Buffer : constant Flux.Interfaces.Bounded_Array.Duplex.Acc
-     := new Flux.Interfaces.Bounded_Array.Duplex.Instance
-       (Len => Flux_Benchmark_Config.Buffer_Size);
+   Prod_Buffer : Flux.Interfaces.Bounded_Array.Duplex.Instance
+     (Len => Flux_Benchmark_Config.Buffer_Size);
 
-   Consumer_Buffer : constant Flux.Interfaces.Bounded_Array.Duplex.Acc
-     := new Flux.Interfaces.Bounded_Array.Duplex.Instance
-       (Len => Flux_Benchmark_Config.Buffer_Size);
+   Consumer_Buffer : Flux.Interfaces.Bounded_Array.Duplex.Instance
+     (Len => Flux_Benchmark_Config.Buffer_Size);
 
    ------------------
    -- Run_Producer --
@@ -33,7 +31,7 @@ package body Flux_Benchmark.Interfaces is
       for Count in 1 .. Flux_Benchmark_Config.Number_Of_Iterations loop
          Prod_Buffer.Reset;
          for X in Standard.Interfaces.Unsigned_32'Range loop
-            Encode_LEB128 (Prod_Buffer.all, X, Success);
+            Encode_LEB128 (Prod_Buffer, X, Success);
             exit when not Success;
          end loop;
       end loop;
@@ -58,11 +56,11 @@ package body Flux_Benchmark.Interfaces is
       for Count in 1 .. Flux_Benchmark_Config.Number_Of_Iterations loop
 
          T.Stop;
-         Consumer_Buffer.all := Prod_Buffer.all;
+         Consumer_Buffer := Prod_Buffer;
          T.Start;
 
          for X in Standard.Interfaces.Unsigned_32'Range loop
-            Decode_LEB128 (Consumer_Buffer.all, Val, Success);
+            Decode_LEB128 (Consumer_Buffer, Val, Success);
             exit when not Success;
          end loop;
       end loop;

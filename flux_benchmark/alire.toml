@@ -4,7 +4,6 @@ version = "0.1.0-dev"
 
 [[depends-on]]
 flux = "*"
-stopwatch = "~0.1.0"
 
 [[pins]]
 flux = { path='..' }
