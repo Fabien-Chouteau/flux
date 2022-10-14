@@ -46,6 +46,39 @@ package body Flux.Traits.LEB128 is
         with Import, Convention => Intrinsic;
 
       Shift : Natural := 0;
+      B : Storage_Element;
+   begin
+
+      Value := 0;
+      loop
+         Source.Read (S, B, Success);
+
+         if not Success then
+            return;
+         end if;
+
+         Value := Value or Shift_Left (T (B and 2#0111_1111#), Shift);
+
+         exit when (B and 2#1000_0000#) = 0;
+
+         Shift := Shift + 7;
+      end loop;
+   end Decode;
+
+   -----------------
+   -- Decode_Seek --
+   -----------------
+
+   procedure Decode_Seek (S       : in out Source.Instance;
+                          Value   :    out T;
+                          Success :    out Boolean)
+   is
+      function Shift_Left
+        (Value  : T;
+         Amount : Natural) return T
+        with Import, Convention => Intrinsic;
+
+      Shift : Natural := 0;
       Offset : Storage_Count := 0;
       B : Storage_Element;
    begin
@@ -67,6 +100,6 @@ package body Flux.Traits.LEB128 is
       end loop;
 
       Source.Consume (S, Offset + 1);
-   end Decode;
+   end Decode_Seek;
 
 end Flux.Traits.LEB128;
