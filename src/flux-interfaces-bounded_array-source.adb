@@ -1,7 +1,3 @@
-with System.Storage_Elements; use System.Storage_Elements;
-
-with Flux.Interfaces.Source;
-
 package body Flux.Interfaces.Bounded_Array.Source is
 
    ----------

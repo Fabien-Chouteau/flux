@@ -12,11 +12,13 @@ package Flux.Interfaces.As_Traits.Source
 with Preelaborate
 is
 
+   overriding
    procedure Read (This    : in out Instance;
                    Data    :    out Storage_Element;
                    Success :    out Boolean)
      with Inline;
 
+   overriding
    procedure Read (This : in out Instance;
                    Data :    out Storage_Array;
                    Last :    out Storage_Count)

@@ -4,6 +4,7 @@ package body Flux.Interfaces.As_Traits.Source is
    -- Read --
    ----------
 
+   overriding
    procedure Read (This    : in out Instance;
                    Data    :    out Storage_Element;
                    Success :    out Boolean)
@@ -16,6 +17,7 @@ package body Flux.Interfaces.As_Traits.Source is
    -- Read --
    ----------
 
+   overriding
    procedure Read (This : in out Instance;
                    Data :    out Storage_Array;
                    Last :    out Storage_Count)

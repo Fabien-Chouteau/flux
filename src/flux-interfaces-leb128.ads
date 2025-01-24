@@ -4,7 +4,7 @@ with Flux.Interfaces.Seekable_Source;
 package Flux.Interfaces.LEB128
 with Preelaborate
 is
-    generic
+   generic
       type T is mod <>;
    procedure Encode (S       : in out Sink.Instance'Class;
                      Value   :        T;

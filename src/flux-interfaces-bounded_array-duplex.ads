@@ -38,16 +38,19 @@ is
                    Data :    out Storage_Array;
                    Last :    out Storage_Count);
 
+   overriding
    procedure Seek_Relative (This    : in out Instance;
                             Offset  :        Storage_Count;
                             Data    :    out Storage_Element;
                             Success :    out Boolean);
 
+   overriding
    procedure Seek_Relative (This    : in out Instance;
                             Offset  :        Storage_Count;
                             Data    :    out Storage_Array;
                             Last    :    out Storage_Count);
 
+   overriding
    procedure Consume (This   : in out Instance;
                       Count  :        Storage_Count);
 
@@ -60,7 +63,7 @@ private
    with record
       Data : Storage_Array (1 .. Len);
       Next_In : Storage_Count := 1;
-      Next_Out: Storage_Count := 1;
+      Next_Out : Storage_Count := 1;
    end record;
 
 end Flux.Interfaces.Bounded_Array.Duplex;

@@ -1,5 +1,11 @@
 package body Flux.Traits.Bounded_Array_Duplex is
 
+   pragma Warnings (Off, "formal parameter * is not modified");
+
+   -----------
+   -- Reset --
+   -----------
+
    procedure Reset (This : in out Instance) is
    begin
       This.Next_In := This.Data'First;

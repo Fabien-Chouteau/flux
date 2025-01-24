@@ -11,7 +11,7 @@ is
    type Instance (Len : Storage_Count) is record
       Data : Storage_Array (1 .. Len);
       Next_In : Storage_Count := 1;
-      Next_Out: Storage_Count := 1;
+      Next_Out : Storage_Count := 1;
    end record;
 
    procedure Reset (This : in out Instance)

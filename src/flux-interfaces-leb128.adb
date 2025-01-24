@@ -70,5 +70,4 @@ package body Flux.Interfaces.LEB128 is
       S.Consume (Offset + 1);
    end Decode;
 
-
 end Flux.Interfaces.LEB128;

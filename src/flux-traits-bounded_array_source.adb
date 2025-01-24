@@ -1,5 +1,7 @@
 package body Flux.Traits.Bounded_Array_Source is
 
+   pragma Warnings (Off, "formal parameter * is not modified");
+
    ----------
    -- Read --
    ----------

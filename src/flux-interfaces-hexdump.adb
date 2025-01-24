@@ -1,8 +1,5 @@
 with System.Storage_Elements; use System.Storage_Elements;
 
-with Flux.Interfaces.Sink;
-with Flux.Interfaces.Source;
-
 package body Flux.Interfaces.Hexdump is
 
    function Shift_Right

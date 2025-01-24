@@ -2,6 +2,8 @@ with GNAT.OS_Lib; use GNAT.OS_Lib;
 
 package body Flux.Traits.File_IO.Sink is
 
+   pragma Warnings (Off, "formal parameter * is not modified");
+
    -----------
    -- Write --
    -----------

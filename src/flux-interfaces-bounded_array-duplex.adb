@@ -1,8 +1,3 @@
-with System.Storage_Elements; use System.Storage_Elements;
-
-with Flux.Interfaces.Sink;
-with Flux.Interfaces.Source;
-
 package body Flux.Interfaces.Bounded_Array.Duplex is
 
    -----------
@@ -99,6 +94,7 @@ package body Flux.Interfaces.Bounded_Array.Duplex is
    -- Seek_Relative --
    -------------------
 
+   overriding
    procedure Seek_Relative (This    : in out Instance;
                             Offset  :        Storage_Count;
                             Data    :    out Storage_Element;
@@ -119,6 +115,7 @@ package body Flux.Interfaces.Bounded_Array.Duplex is
    -- Seek_Relative --
    -------------------
 
+   overriding
    procedure Seek_Relative (This    : in out Instance;
                             Offset  :        Storage_Count;
                             Data    :    out Storage_Array;
@@ -141,12 +138,12 @@ package body Flux.Interfaces.Bounded_Array.Duplex is
    -- Consume --
    -------------
 
+   overriding
    procedure Consume (This  : in out Instance;
                       Count :        Storage_Count)
    is
    begin
       This.Next_Out := This.Next_Out + Count;
    end Consume;
-
 
 end Flux.Interfaces.Bounded_Array.Duplex;

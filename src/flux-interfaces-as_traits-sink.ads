@@ -12,11 +12,13 @@ package Flux.Interfaces.As_Traits.Sink
 with Preelaborate
 is
 
+   overriding
    procedure Write (This    : in out Instance;
                     Data    :        Storage_Element;
                     Success :    out Boolean)
      with Inline;
 
+   overriding
    procedure Write (This : in out Instance;
                     Data :        Storage_Array;
                     Last :    out Storage_Count)
