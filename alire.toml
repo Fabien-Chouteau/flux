@@ -1,6 +1,6 @@
 name = "flux"
 description = "Experimental data stream library for Ada"
-version = "0.1.0-dev"
+version = "1.0.0"
 licenses = "Apache-2.0"
 
 authors = ["Fabien Chouteau"]
